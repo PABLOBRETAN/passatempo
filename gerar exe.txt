@@ -1,1 +1,3 @@
-pyinstaller --windowed --onefile play.py
+version https://git-lfs.github.com/spec/v1
+oid sha256:1818195e5ca6b64f3b990487b48798fecf259bc42a1193da144f67cfd6a0ebfe
+size 41

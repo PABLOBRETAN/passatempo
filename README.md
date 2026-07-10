@@ -1,115 +1,153 @@
-# Passatempo - Jogos antigos da internet
+# Play Ouro
 
-Colecao local de jogos antigos em Flash (`.swf`) com um menu simples feito em Python. O projeto foi pensado para abrir os jogos sem depender do navegador, usando o Flash Player standalone que fica junto dos arquivos.
+Biblioteca local para organizar e abrir jogos clássicos em Flash (`.swf`) no Windows. O launcher usa o Flash Player standalone que acompanha o projeto, sem depender do navegador.
 
-## O que tem no projeto
+`play.py` é a versão oficial do programa. Ele nunca renomeia, move ou altera os arquivos dentro de `JOGOS`.
 
-- `play.py`: programa principal. Ele cria uma janela com a lista dos jogos e abre o jogo escolhido.
-- `JOGOS/`: pasta com os arquivos `.swf`.
-- `flashplayer_32_sa.exe`: Flash Player standalone usado para executar os jogos.
-- `dist/play.exe`: versao executavel ja gerada do menu.
-- `dist/JOGOS/`: copia dos jogos para acompanhar o executavel.
-- `dist/flashplayer_32_sa.exe`: copia do Flash Player para acompanhar o executavel.
-- `gerar exe.txt`: comando usado para gerar o executavel com PyInstaller.
-- `instal py.ps1`: comando basico para instalar o PyInstaller.
-- `play.spec`: configuracao gerada pelo PyInstaller.
+## Destaques
+
+- Interface escura, limpa e responsiva, com visual neon discreto.
+- Biblioteca em grade, busca por nome, filtros por categoria e favoritos.
+- Botão **Atualizar** para reconhecer jogos adicionados sem reiniciar o programa.
+- Abertura segura do Flash Player, sem `shell=True`.
+- Favoritos salvos no perfil do Windows, em `%APPDATA%\PlayOuro\favorites.json`.
+
+## Estrutura organizada
+
+```text
+passatempo/
+├── play.py                    # Launcher oficial
+├── build.ps1                  # Gera a release portátil
+├── flashplayer_32_sa.exe      # Player Flash standalone
+├── JOGOS/                     # Biblioteca original de arquivos .swf
+├── README.md
+├── arquivos_antigos/          # Protótipos, builds e scripts antigos (ignorado pelo Git)
+│   └── 2026-07-10/
+├── build/                     # Arquivos temporários do PyInstaller (ignorado pelo Git)
+└── release/                   # Versão pronta para uso (ignorado pelo Git)
+    └── PlayOuro/
+        ├── PlayOuro.exe
+        ├── flashplayer_32_sa.exe
+        ├── JOGOS/
+        └── _internal/
+```
+
+As versões antigas (`play-new`, `dist`, especificações e scripts antigos) foram preservadas em `arquivos_antigos/2026-07-10/`. Elas não participam da versão atual.
 
 ## Como usar
 
-### Opcao 1: abrir pelo executavel
-
-1. Entre na pasta `dist`.
-2. Abra `play.exe`.
-3. Escolha um jogo na lista.
-
-Importante: para funcionar, o `play.exe`, o `flashplayer_32_sa.exe` e a pasta `JOGOS` precisam ficar juntos na mesma pasta.
-
-### Opcao 2: abrir pelo Python
+### Pelo Python
 
 Requisitos:
 
-- Windows.
-- Python instalado.
-- `flashplayer_32_sa.exe` na mesma pasta do `play.py`.
-- Pasta `JOGOS` na mesma pasta do `play.py`.
+- Windows;
+- Python com Tkinter/Tcl-Tk instalado;
+- `flashplayer_32_sa.exe` e a pasta `JOGOS` ao lado de `play.py`.
 
-Comando:
+Na pasta do projeto, execute:
 
 ```powershell
 python play.py
 ```
 
-## Como adicionar novos jogos
+### Abrir o executável para jogar
 
-1. Coloque o arquivo `.swf` dentro da pasta `JOGOS`.
-2. Abra novamente o programa.
-3. O jogo novo aparecera automaticamente na lista.
-
-O nome exibido no menu e o nome do arquivo sem a extensao `.swf`. Para deixar o menu mais organizado, renomeie o arquivo antes de colocar na pasta.
-
-## Como gerar um novo executavel
-
-Instale o PyInstaller:
-
-```powershell
-pip install pyinstaller
-```
-
-Depois gere o executavel:
-
-```powershell
-pyinstaller --windowed --onefile play.py
-```
-
-O arquivo gerado fica em:
+1. Abra a pasta `release\PlayOuro` no Explorador de Arquivos.
+2. Dê dois cliques em `PlayOuro.exe`.
+3. Na tela do Play Ouro, pesquise ou escolha um jogo na biblioteca.
+4. Clique em **JOGAR ▶** no cartão do jogo escolhido.
 
 ```text
-dist/play.exe
+release\PlayOuro\PlayOuro.exe
 ```
 
-Depois de gerar, copie para a pasta `dist`:
+O Flash Player abrirá o jogo em outra janela. Para fechar um jogo, feche essa janela normalmente e volte ao Play Ouro para escolher outro.
 
-- `flashplayer_32_sa.exe`
-- a pasta `JOGOS`
+O executável, `flashplayer_32_sa.exe`, a pasta `JOGOS` e `_internal` precisam permanecer juntos. Não copie somente o `.exe`.
 
-Sem esses arquivos ao lado do `play.exe`, o menu abre erro porque nao encontra o player ou os jogos.
+## Como organizar a biblioteca
 
-## Como funciona
+1. Copie um novo arquivo `.swf` diretamente para `JOGOS`.
+2. Abra o launcher ou clique em **Atualizar**.
+3. Pesquise pelo nome, escolha uma categoria ou marque o jogo com uma estrela para adicioná-lo aos favoritos.
 
-O programa identifica a pasta onde esta sendo executado. A partir dela, procura:
+O título e a categoria exibidos são criados a partir do nome do arquivo; o arquivo original continua intacto.
 
-- `flashplayer_32_sa.exe`
-- `JOGOS/`
+Atalhos úteis:
 
-Depois lista todos os arquivos com extensao `.swf`, cria um botao para cada jogo e, quando um botao e clicado, abre o Flash Player passando o caminho do jogo escolhido.
+- `Ctrl + F`: foca a busca;
+- `Enter`: abre o primeiro resultado;
+- `Esc`: limpa a busca.
 
-## Organizacao sugerida
+## Gerar a release pelo script
 
-```text
-passatempo/
-|-- play.py
-|-- flashplayer_32_sa.exe
-|-- JOGOS/
-|   |-- Pac man.swf
-|   |-- SONIC.swf
-|   `-- outros jogos...
-`-- dist/
-    |-- play.exe
-    |-- flashplayer_32_sa.exe
-    `-- JOGOS/
+Primeiro, confirme que o Python consegue iniciar o Tkinter:
+
+```powershell
+python -c "import tkinter as tk; root = tk.Tk(); root.withdraw(); root.update_idletasks(); root.destroy(); print('Tkinter OK')"
 ```
 
-## Observacoes
+Instale o PyInstaller uma única vez:
 
-- Flash e uma tecnologia antiga e foi descontinuada nos navegadores modernos. Este projeto usa o player standalone para preservar e abrir os jogos localmente.
-- Alguns jogos podem nao funcionar perfeitamente dependendo do arquivo `.swf`.
-- Evite apagar ou mover `flashplayer_32_sa.exe` e `JOGOS`, porque o menu depende desses caminhos.
-- Se o Windows bloquear o executavel baixado ou copiado, pode ser necessario liberar o arquivo nas propriedades do Windows.
+```powershell
+python -m pip install --user --upgrade pyinstaller
+```
 
-## Ideias futuras
+Depois execute o script. Se `python` já aponta para um Python com Tkinter, use:
 
-- Adicionar busca por nome do jogo.
-- Separar jogos por categoria.
-- Mostrar capas ou miniaturas.
-- Criar botao de favoritos.
-- Corrigir textos com acentos e emojis caso aparecam caracteres estranhos em algum computador.
+```powershell
+powershell -ExecutionPolicy Bypass -File .\build.ps1
+```
+
+Para informar um Python específico, por exemplo o Python 3.13 instalado no perfil do usuário:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\build.ps1 -Python "$env:LOCALAPPDATA\Programs\Python\Python313\python.exe"
+```
+
+O script verifica o Tkinter antes do build e gera uma pasta completa em `release\PlayOuro\`.
+
+## Gerar manualmente, sem o script
+
+Use estes comandos no PowerShell a partir da raiz do projeto. Troque o valor de `$python` se estiver usando outra instalação válida do Python.
+
+```powershell
+$python = "$env:LOCALAPPDATA\Programs\Python\Python313\python.exe"
+
+New-Item -ItemType Directory -Force .\release, .\build\release, .\build\spec | Out-Null
+
+& $python -m PyInstaller `
+  --noconfirm `
+  --clean `
+  --windowed `
+  --onedir `
+  --name PlayOuro `
+  --distpath .\release `
+  --workpath .\build\release `
+  --specpath .\build\spec `
+  .\play.py
+
+Copy-Item -LiteralPath .\flashplayer_32_sa.exe `
+  -Destination .\release\PlayOuro\flashplayer_32_sa.exe -Force
+
+Copy-Item -LiteralPath .\JOGOS `
+  -Destination .\release\PlayOuro\JOGOS -Recurse -Force
+```
+
+O resultado final estará em `release\PlayOuro\PlayOuro.exe`. O formato `--onedir` é intencional: o app depende do player e da biblioteca de jogos ao lado do executável.
+
+## Solução de problemas
+
+| Situação | Como resolver |
+| --- | --- |
+| O launcher não encontra o Flash Player | Deixe `flashplayer_32_sa.exe` na mesma pasta de `PlayOuro.exe` ou de `play.py`. |
+| A pasta de jogos não foi encontrada | Deixe `JOGOS` ao lado do launcher, com esse mesmo nome. |
+| Um jogo não aparece | Confirme que termina em `.swf`, está diretamente dentro de `JOGOS` e clique em **Atualizar**. |
+| O build informa que o Tkinter não inicia | Use ou reinstale um Python com Tcl/Tk; o comando de teste desta documentação deve mostrar `Tkinter OK`. |
+| O Windows exibe um aviso ao abrir a release | O executável gerado localmente não possui assinatura digital; use-o apenas se a origem dos arquivos for confiável. |
+
+## Observações
+
+- O Flash foi descontinuado nos navegadores; este projeto funciona com o player standalone local.
+- Alguns arquivos `.swf` podem ter limitações próprias e não funcionar perfeitamente.
+- Antes de redistribuir jogos, player ou uma release do projeto, confirme as licenças e permissões dos arquivos incluídos.

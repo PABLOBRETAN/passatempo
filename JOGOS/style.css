@@ -1,0 +1,284 @@
+/* Reset and base styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    background-color: #121212;
+    color: #e0e0e0;
+    margin: 0;
+}
+
+#container {
+    max-width: 1500px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #1e1e1e;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+    border-radius: 8px;
+}
+
+h1 {
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: 20px;
+    color: #ffffff;
+}
+
+h2 {
+    font-size: 1.8rem;
+    color: #bb86fc;
+    margin-top: 30px;
+}
+
+p {
+    margin-bottom: 20px;
+    color: #b0b0b0;
+    line-height: 1.8;
+}
+
+a {
+    color: #bb86fc;
+    text-decoration: none !important;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: #ffffff;
+    text-decoration: underline;
+}
+
+/* Card container */
+.card {
+    width: 100%;
+    min-height: 254px;
+    border-radius: 4px;
+    background: #212121;
+    display: flex;
+    gap: 12px;
+    padding: 1.2em;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    overflow-y: auto;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
+
+/* Individual card items */
+.card p {
+    flex: 1 1 140px;
+    height: 100%;
+    margin: 0;
+    overflow: hidden;
+    cursor: pointer;
+    border-radius: 6px;
+    background: #212121;
+    border: 1px solid #ff5a91;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: flex 0.5s ease, background-color 0.3s ease, border-color 0.3s ease,
+        box-shadow 0.3s ease;
+    position: relative;
+    user-select: none;
+}
+
+.card p:hover {
+    flex: 5 1 320px;
+    background-color: #2e2e2e;
+    border-color: #ff3377;
+    box-shadow: 0 0 15px 2px rgba(255, 85, 140, 0.8);
+    z-index: 10;
+    /* keep hovered card on top */
+}
+
+/* Text inside card */
+.card p span {
+    min-width: 14em;
+    padding: 0.5em;
+    text-align: center;
+    transform: rotate(-90deg);
+    transition: transform 0.5s ease, color 0.3s ease;
+    text-transform: uppercase;
+    color: #ff568e;
+    letter-spacing: 0.1em;
+}
+
+.card p:hover span {
+    transform: rotate(0);
+    color: #ff2a7b;
+}
+
+/* Links inside cards */
+.card p a {
+    font-weight: 600;
+    color: inherit;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 100%;
+    display: block;
+    text-align: center;
+}
+
+/* Responsive typography and layout for tablets and mobiles */
+@media (max-width: 999px) {
+    h1 {
+        font-size: 2rem;
+    }
+
+    h2 {
+        font-size: 1.6rem;
+    }
+
+    p {
+        font-size: 0.9rem;
+    }
+
+    .card {
+        flex-direction: column;
+        min-height: auto;
+        height: auto;
+    }
+
+    .card p {
+        flex: none;
+        width: 100%;
+        margin-bottom: 12px;
+        border-radius: 8px;
+    }
+
+    .card p span {
+        transform: rotate(0);
+        min-width: auto;
+        padding: 0.75em;
+    }
+
+    .card p:hover {
+        flex: none;
+        background-color: #2e2e2e;
+        box-shadow: none;
+    }
+}
+
+/* Responsive adjustments for mobile screens */
+@media (max-width: 480px) {
+    h1 {
+        font-size: 1.8rem;
+    }
+
+    h2 {
+        font-size: 1.4rem;
+    }
+
+    p {
+        font-size: 0.8rem;
+    }
+
+    #container {
+        padding: 10px;
+    }
+
+    .card {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .card p {
+        flex: none;
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    .card p span {
+        transform: rotate(0);
+        font-size: 0.85rem;
+    }
+
+    .card p:hover {
+        flex: none;
+        box-shadow: none;
+    }
+}
+
+/* Button styles remain unchanged */
+
+.btn-github {
+    cursor: pointer;
+    display: flex;
+    gap: 0.5rem;
+    border: none;
+    transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+    border-radius: 100px;
+    font-weight: 800;
+    place-content: center;
+    padding: 0.75rem 1rem;
+    font-size: 0.825rem;
+    line-height: 1rem;
+    background-color: rgba(0, 0, 0, 0.4);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.04);
+    color: #bb86fc;
+}
+
+.btn-github:hover {
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08),
+        inset 0 0 0 1px rgba(252, 232, 3, 0.08);
+    color: #fff;
+    transform: translateY(-0.25rem);
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    gap: 1rem;
+}
+
+.btn-donate {
+    --clr-font-main: hsla(0 0% 20% / 100);
+    --btn-bg-1: hsla(194 100% 69% / 1);
+    --btn-bg-2: hsla(217 100% 56% / 1);
+    --btn-bg-color: hsla(360 100% 100% / 1);
+    --radii: 0.5em;
+    cursor: pointer;
+    padding: 0.9em 1.4em;
+    min-width: 120px;
+    min-height: 44px;
+    font-size: var(--size, 1rem);
+    font-weight: 500;
+    transition: 0.8s;
+    background-size: 280% auto;
+    background-image: linear-gradient(325deg,
+            var(--btn-bg-2) 0%,
+            var(--btn-bg-1) 55%,
+            var(--btn-bg-2) 90%);
+    border: none;
+    border-radius: var(--radii);
+    color: var(--btn-bg-color);
+    box-shadow: 0 0 20px rgba(71, 184, 255, 0.5), 0 5px 5px -1px rgba(58, 125, 233, 0.25),
+        inset 4px 4px 8px rgba(175, 230, 255, 0.5),
+        inset -4px -4px 8px rgba(19, 95, 216, 0.35);
+}
+
+.btn-donate:hover {
+    background-position: right top;
+}
+
+.btn-donate:is(:focus, :focus-visible, :active) {
+    outline: none;
+    box-shadow: 0 0 0 3px var(--btn-bg-color), 0 0 0 6px var(--btn-bg-2);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .btn-donate {
+        transition: linear;
+    }
+}

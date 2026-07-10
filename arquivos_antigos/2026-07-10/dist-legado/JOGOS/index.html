@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="google-adsense-account" content="ca-pub-2314340578474791" />
+    <title>Adobe Flash Games Directory</title>
+    <link rel="stylesheet" type="text/css" href="style.css" />
+    <script
+      async
+      src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2314340578474791"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+
+  <body>
+    <div id="container">
+      <h1>Adobe Flash Games Directory</h1>
+      <div class="center">
+        <button
+          class="btn-donate"
+          onclick="window.location.href='https://buymeacoffee.com/ammarsaa'"
+        >
+          Donate Now!
+        </button>
+        <button
+          class="btn-donate"
+          onclick="window.location.href='https://github.com/ammarsaa'"
+        >
+          Hire Me!
+        </button>
+      </div>
+      <br />
+      <p>
+        Here you can find a collection of Adobe Flash games that you can play
+        online for free. Please note that modern browsers no longer support
+        Flash content, so you will need to use a Flash Player emulator or
+        standalone Flash Player to run these games.
+      </p>
+
+      <!-- Card for all games -->
+      <h2>Available Games</h2>
+      <div class="card" id="games-list">
+        <p>Loading games...</p>
+      </div>
+
+      <h2>About Flash Games</h2>
+      <p>
+        Flash games were a huge part of the early internet culture, providing
+        endless entertainment for users around the world. Though Flash is no
+        longer supported by modern browsers, these games can still be played
+        using standalone Flash Players or emulators like Ruffle.
+      </p>
+      <p>
+        <strong>Installation:</strong> To play these games, download and install
+        the Flash Player provided in the repository (<a
+          href="./flashplayer_32_sa.exe"
+          >Flash Player</a
+        >
+        or <a href="./flashplayer_32_sa_debug.exe">Flash Player</a>). You can
+        also use emulators to keep enjoying these classics.
+      </p>
+      <p>
+        <strong>Controls:</strong> Most games utilize simple keyboard and mouse
+        controls. Refer to the instructions provided in each game.
+      </p>
+      <p>
+        <strong>Credits:</strong> This collection is a fan-made effort to
+        preserve the history of Flash games. All game rights remain with their
+        respective creators.
+      </p>
+      <div class="center">
+        <p>
+          <strong>Copyright ©<span id="year"></span> @AmmarSAA.</strong>
+        </p>
+      </div>
+      <div class="center">
+        <button
+          type="button"
+          class="btn-github"
+          onclick="window.location.href='https://github.com/AmmarSAA/flash-games-directory'"
+        >
+          <svg
+            width="16"
+            height="16"
+            viewBox="0 0 16 16"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M7.99992 1.33331C7.12444 1.33331 6.25753 1.50575 5.4487 1.84078C4.63986 2.17581 3.90493 2.66688 3.28587 3.28593C2.03563 4.53618 1.33325 6.23187 1.33325 7.99998C1.33325 10.9466 3.24659 13.4466 5.89325 14.3333C6.22659 14.3866 6.33325 14.18 6.33325 14C6.33325 13.8466 6.33325 13.4266 6.33325 12.8733C4.48659 13.2733 4.09325 11.98 4.09325 11.98C3.78659 11.2066 3.35325 11 3.35325 11C2.74659 10.5866 3.39992 10.6 3.39992 10.6C4.06659 10.6466 4.41992 11.2866 4.41992 11.2866C4.99992 12.3 5.97992 12 6.35992 11.84C6.41992 11.4066 6.59325 11.1133 6.77992 10.9466C5.29992 10.78 3.74659 10.2066 3.74659 7.66665C3.74659 6.92665 3.99992 6.33331 4.43325 5.85998C4.36659 5.69331 4.13325 4.99998 4.49992 4.09998C4.49992 4.09998 5.05992 3.91998 6.33325 4.77998C6.85992 4.63331 7.43325 4.55998 7.99992 4.55998C8.56659 4.55998 9.13992 4.63331 9.66659 4.77998C10.9399 3.91998 11.4999 4.09998 11.4999 4.09998C11.8666 4.99998 11.6333 5.69331 11.5666 5.85998C11.9999 6.33331 12.2533 6.92665 12.2533 7.66665C12.2533 10.2133 10.6933 10.7733 9.20659 10.94C9.44659 11.1466 9.66659 11.5533 9.66659 12.1733C9.66659 13.0666 9.66659 13.7866 9.66659 14C9.66659 14.18 9.77325 14.3933 10.1133 14.3333C12.7599 13.44 14.6666 10.9466 14.6666 7.99998C14.6666 7.1245 14.4941 6.25759 14.1591 5.44876C13.8241 4.63992 13.333 3.90499 12.714 3.28593C12.0949 2.66688 11.36 2.17581 10.5511 1.84078C9.7423 1.50575 8.8754 1.33331 7.99992 1.33331V1.33331Z"
+              fill="currentcolor"
+            ></path>
+          </svg>
+          <span>View on Github</span>
+        </button>
+      </div>
+    </div>
+    <script>
+      document.querySelector("#year").textContent = new Date().getFullYear();
+
+      async function fetchGames() {
+        const repoOwner = "AmmarSAA";
+        const repoName = "flash-games-directory";
+        const path = ""; // root or folder containing .swf files
+
+        const apiUrl = `https://api.github.com/repos/${repoOwner}/${repoName}/contents/${path}`;
+
+        try {
+          const response = await fetch(apiUrl);
+          if (!response.ok) throw new Error("Failed to fetch file list");
+
+          const files = await response.json();
+
+          // Filter .swf files only
+          const swfFiles = files.filter((file) => file.name.endsWith(".swf"));
+
+          // Utility to convert hyphen-case filename (without extension) to Pascal Case
+          function toPascalCase(filename) {
+            const nameWithoutExt = filename.replace(/\.swf$/i, "");
+            return nameWithoutExt
+              .split("-")
+              .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+              .join(" ");
+          }
+
+          const container = document.getElementById("games-list");
+          container.innerHTML = ""; // Clear loading text
+
+          swfFiles.forEach((file) => {
+            const displayName = toPascalCase(file.name);
+            const link = document.createElement("a");
+            link.href = `./${file.name}`;
+            link.target = "_blank";
+            link.textContent = displayName;
+
+            const p = document.createElement("p");
+            p.appendChild(link);
+            container.appendChild(p);
+          });
+
+          if (swfFiles.length === 0) {
+            container.textContent = "No games found.";
+          }
+        } catch (error) {
+          document.getElementById("games-list").textContent =
+            "Error loading games.";
+          console.error(error);
+        }
+      }
+
+      fetchGames();
+    </script>
+  </body>
+</html>
